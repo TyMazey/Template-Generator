@@ -16,8 +16,8 @@
     Second Co-Author: <input type = "text" name = "coAuthor-2" />
     <br />
     Third Co-Author: <input type = "text" name = "coAuthor-3" />
-    <input type = "submit" value = "Submit" />
     <br />
+    <input type = "submit" value = "Submit" />
 </form>
 
 </body>

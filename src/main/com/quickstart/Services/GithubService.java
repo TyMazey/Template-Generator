@@ -6,6 +6,9 @@ import kong.unirest.Unirest;
 import kong.unirest.json.JSONObject;
 import main.com.quickstart.Models.User;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 public class GithubService {
 
@@ -29,6 +32,14 @@ public class GithubService {
         }
     }
 
+    public static ArrayList<User> getCoAuthors(Collection<Object> userNames, String token){
+        ArrayList<User> userList = new ArrayList<User>();
+        for (int i = 0;i < userNames.size(); i++) {
+           userList.add(getUserData(token, userNames.toArray()[i].toString()));
+        }
+        return userList;
+    }
+
 
     public static User getUserData(String token, String username){
         HttpResponse<JsonNode> response = Unirest.get("https://api.github.com/users/{username}")
@@ -39,9 +50,15 @@ public class GithubService {
 
         if(response.isSuccess()){
             JSONObject JSONData = response.getBody().getObject();
-            return new User(JSONData.getString("login"), JSONData.getString("email"));
+            String email;
+            try{
+                email = JSONData.getString("email");
+            }catch(Exception e){
+                email = "Users email is set to private.";
+            }
+            return new User(email, username);
         }else{
-            return null;
+            return new User("Unable to find User.", username);
         }
     }
 }

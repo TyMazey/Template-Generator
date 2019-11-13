@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: tymazey
@@ -8,9 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Template Download</title>
 </head>
 <body>
-    ${template}
+    <h1>Copy and paste this to your .gitmessage file!</h1>
+    <article>
+        ${template}
+    </article>
 </body>
 </html>

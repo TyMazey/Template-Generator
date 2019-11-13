@@ -15,7 +15,7 @@ public class WelcomeController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model){
+    public String welcome(Model model){
         model.addAttribute("client_id", "a8e1ac06db03b1b38fff");
         return "index";
     }
@@ -26,6 +26,7 @@ public class WelcomeController {
         if(userToken != null){
             Cookie authCookie = new Cookie("access_token", userToken);
             authCookie.setMaxAge(60*60);
+            response.addCookie(authCookie);
             return "template-generator";
 
         }else{
